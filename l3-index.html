@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Analysis</title>
+    <link rel="stylesheet" href="l3-style.css">
+</head>
+<body>
+
+    <button class="hamburger-btn" id="js-hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+
+    <header>
+        高さ80pxのヘッダーです
+    </header>
+
+    <div class="container">
+        
+        <aside class="sidebar" id="js-sidebar">
+            <p class="sidebar-desu">幅200pxのサイドバーです</p>
+            <ul>
+                <li>Home</li>
+                <li>About</li>
+                <li>Contact</li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <section>
+                <h1>Section 1</h1>
+                <p>まず、PC(768pxより大きい)の時に表示されますよ</p>
+            </section>
+
+            <section>
+                <h1>Section 2</h1>
+                <p>次に、PC(768pxより大きい)の時に表示されますよ</p>
+            </section>
+
+            <section>
+                <h1>Section 3</h1>
+                <p>そして、PC(768pxより大きい)の時に表示されますよ</p>
+            </section>
+
+            <section>
+                <h1>Section 4</h1>
+                <p>最後に、PC(768pxより大きい)の時に表示されますよ</p>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        高さ60pxのフッターです
+    </footer>
+
+<script>
+    // JavaScriptはそのままでOKです
+    const hamburger = document.getElementById('js-hamburger');
+    const sidebar = document.getElementById('js-sidebar');
+
+    hamburger.addEventListener('click', function() {
+        sidebar.classList.toggle('open');
+        hamburger.classList.toggle('active');
+    });
+</script>
+
+</body>
+</html>

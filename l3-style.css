@@ -1,0 +1,192 @@
+/* =========================================
+   1. リセットCSS & 基本設定
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    /* 重要：パディングや線を幅に含める設定（レイアウト崩れ防止） */
+    box-sizing: border-box;
+    font-family: "Helvetica Neue",
+                 Arial,
+                 "Hiragino Kaku Gothic ProN",
+                 "Hiragino Sans",
+                 "Meiryo",
+                 sans-serif;
+    font-size: x-large;
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+h1{
+    font-weight: bold;
+}
+
+section{
+    margin-bottom: 120px;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.sidebar-desu{
+    font-weight: bold;
+}
+
+/* =========================================
+   2. PC / 共通レイアウト
+   ========================================= */
+
+/* ヘッダー */
+header {
+    height: 80px;
+    background-color: #ADD8E6; /* lightblue */
+    padding: 0 20px;
+
+    width: 100%;
+
+    font-weight: bold;
+    
+    /* Flexbox設定 */
+    display: flex;
+    justify-content: space-between; /* 左右に配置 */
+    align-items: center;            /* 上下中央揃え */
+    
+    position: fixed;
+    z-index: 20; /* サイドバーより手前に表示 */
+}
+
+/* ハンバーガーボタン（PCでは非表示） */
+.hamburger-btn {
+    z-index: 110;
+    display: none; 
+}
+
+/* コンテナ（サイドバーとメインエリアを囲む） */
+.container {
+    display: flex; /* 横並びにする */
+    padding-top: 80px;
+    min-height: calc(100vh + 600px); 
+}
+
+/* サイドバー（PC設定） */
+.sidebar {
+    /* ★修正ポイント：幅を固定しないとPCで潰れてしまいます */
+    width: 200px;
+    flex-shrink: 0; /* 画面が狭くなっても幅を縮めない */
+    
+    background-color: #90EE90; /* lightgreen */
+    padding: 20px;
+}
+
+/* メインコンテンツ */
+.main-content {
+    background-color: #F08080; /* lightcoral */
+    flex-grow: 1; /* 残りの幅をすべて埋める */
+    padding: 20px;
+}
+
+footer{
+    height: 60px;
+    background-color: #aaa; 
+    padding: 0 20px;
+    
+    /* Flexbox設定 */
+    display: flex;
+    justify-content: center; /* 左右に配置 */
+    align-items: center;            /* 上下中央揃え */
+    
+    position: relative;
+}
+
+/* =========================================
+   3. レスポンシブ対応 (768px以下 / スマホ)
+   ========================================= */
+@media (max-width: 768px) {
+
+    /* --- サイドバーの設定 --- */
+    .sidebar {
+        position: fixed; /* 画面に固定して浮かせる */
+        top: 0;
+        left: 0;
+        width: 100%;     /* 幅いっぱい */
+        height: 100vh; 
+        z-index: 10;
+        
+        background-color: rgba(0, 0, 0, 0.4); 
+        color: white;     /* 文字を見やすくするために白に */
+        
+        z-index: 100;     /* ヘッダーよりも手前に出す場合は数字を大きく */
+
+        /* レイアウト調整：中央寄せにする場合 */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        /* 【重要】アニメーション設定：スライドではなく「ふわっと」出す */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    /* クラスがついた時（開いた時） */
+    .sidebar.open {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* --- ハンバーガーボタンの設定 --- */
+    .hamburger-btn {
+        display: block; /* 表示させる */
+        width: 30px;
+        height: 24px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        position: fixed;
+        right: 10px;
+        top: 25px;
+        z-index: 110;
+    }
+
+    /* 三本線の共通スタイル */
+    .bar {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: #333;
+        position: absolute;
+        left: 0;
+        transition: 0.3s; /* 動くスピード */
+        border-radius: 3px;
+    }
+
+    /* 線の位置 */
+    .bar:nth-child(1) { top: 0; }
+    .bar:nth-child(2) { top: 50%; transform: translateY(-50%); }
+    .bar:nth-child(3) { bottom: 0; }
+
+    /* --- クリック時のアニメーション（×印） --- */
+    .hamburger-btn.active .bar:nth-child(1) {
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+    }
+
+    .hamburger-btn.active .bar:nth-child(2) {
+        opacity: 0; /* 真ん中の線を消す */
+    }
+
+    .hamburger-btn.active .bar:nth-child(3) {
+        bottom: 50%;
+        transform: translateY(50%) rotate(-45deg);
+    }
+}
